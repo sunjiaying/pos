@@ -18,3 +18,9 @@ go install github.com/cortesi/devd/cmd/devd
 ```
 devd -ol .
 ```
+
+>如果暂时不想通过自搭web服务，希望快速看到效果，可以查到以下代码，进行注释切换
+```
+// baseurl: 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/',
+baseurl: 'http://127.0.0.1:8000/',
+```
