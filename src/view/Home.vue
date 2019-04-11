@@ -78,9 +78,9 @@ export default {
       baseurl: 'http://127.0.0.1:8000/',
       ruleshow: false,
       rules: [
-        { 'type': 0, 'name': '无', 'jsurl': baseurl + 'rule0.js' },
-        { 'type': 1, 'name': '整单8折', 'jsurl': baseurl + 'rule1.js' },
-        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': baseurl + 'rule2.js' }
+        { 'type': 0, 'name': '无', 'jsurl': this.baseurl + 'rule0.js' },
+        { 'type': 1, 'name': '整单8折', 'jsurl': this.baseurl + 'rule1.js' },
+        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': this.baseurl + 'rule2.js' }
       ],
       bill: {
         'name': 'sunjiaying',
