@@ -37,16 +37,17 @@
           <img style="position: absolute;left: 0px;" src='http://temp.im/80x80/ff5a5f/fff'>
           <span style="position: absolute;left: 100px;" class="custom-text">{{item.matcode}}</span>
           <van-tag style="position: absolute;left: 100px;top:25px;" color="#f2826a" round>吊牌价:{{item.tprice}}</van-tag>
-          <span style="position: absolute;right: 5px;top: 5px;font-size:18pt;"><span style="font-size:8pt;color:#bbb">应收额</span> {{item.fprice}}</span>
+          <span style="position: absolute;right: 8px;top: 5px;font-size:8pt;color:#bbb">应收</span>
+          <span style="position: absolute;right: 5px;top: 25px;font-size:18pt;">{{item.fprice}}</span>
         </div>
       </van-cell>
     </van-list>
 
     <van-popup v-model="ruleshow" position="bottom" :overlay="true" >
       <div style="padding-left:10px;padding-top:10px;padding-right:10px;padding-bottom:10px;overflow-x:auto;">
-        <span style="margin-right:5px;" v-for="rule in rules" v-bind:key="rule.name">
-          <van-button v-if="rule.type===1" round type="primary" size="small" :text="rule.name" @click="loadjs(rule)" />
-          <van-button v-if="rule.type===0" style="min-width: 40px;" round size="small" :text="rule.name" @click="loadjs(rule)" />
+        <span v-for="rule in rules" v-bind:key="rule.name">
+          <van-button v-if="rule.type===1" style="margin:5px;" round type="primary" size="small" :text="rule.name" @click="loadjs(rule)" />
+          <van-button v-if="rule.type===0" style="margin:5px;min-width: 40px;" round size="small" :text="rule.name" @click="loadjs(rule)" />
         </span>
       </div>
     </van-popup>
@@ -83,7 +84,9 @@ export default {
       rules: [
         { 'type': 0, 'name': '无', 'jsurl': 'rule0.js' },
         { 'type': 1, 'name': '整单8折', 'jsurl': 'rule1.js' },
-        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': 'rule2.js' }
+        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': 'rule2.js' },
+        { 'type': 1, 'name': '满5000送A1143001102(2)', 'jsurl': 'rule2.js' },
+        { 'type': 1, 'name': '满5000送A1143001102(3)', 'jsurl': 'rule2.js' }
       ],
       bill: {
         'name': 'sunjiaying',
