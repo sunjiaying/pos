@@ -38,7 +38,7 @@ export default {
     },
     calc(val) {
       if (window.calc === undefined) {
-        throw new Error('window.calc is null');
+        // throw new Error('window.calc is null');
       } else {
         return window.calc(val);
       }
