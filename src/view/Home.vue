@@ -35,7 +35,7 @@
         <van-cell-group>
           <van-cell >
             <div style="height:82px;">
-              <img style="position: absolute;left: 0px;" src='http://temp.im/80x80/ff5a5f/fff'>
+              <img style="position: absolute;left: 0px;" src='http://temp.im/80x80/9f90bf/fff'>
               <span style="position: absolute;left: 100px;" class="custom-text">{{item.matcode}}</span>
               <van-tag style="position: absolute;left: 100px;top:25px;" color="#f2826a" round>吊牌价:{{item.tprice}}</van-tag>
               <span style="position: absolute;right: 8px;top: 5px;font-size:8pt;color:#bbb">应收</span>
