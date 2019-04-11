@@ -23,6 +23,7 @@
       </van-cell>
       <van-cell>
         <template slot="title">
+          <van-tag plain type="success">应付金额:{{getFpriceTotal(bill)}}</van-tag>
           <van-tag plain type="primary">可返积分:{{getPointTotal(bill)}}</van-tag>
           <van-tag v-if="bill.rule" mark type="danger">{{bill.rule.name}}</van-tag>
         </template>
@@ -139,6 +140,13 @@ export default {
         point = point + item.point;
       });
       return point;
+    },
+    getFpriceTotal(bill) {
+      var fprice = 0;
+      bill.items.forEach(item => {
+        fprice = fprice + item.fprice;
+      });
+      return fprice;
     }
   }
 };
