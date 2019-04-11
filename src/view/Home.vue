@@ -34,7 +34,7 @@
         :key="item.matcode" :value="item.fprice">
         <template slot="title">
           <span class="custom-text">{{item.matcode}}</span>
-          <van-tag color="#f2826a" round>{{item.tprice}}</van-tag>
+          <van-tag color="#f2826a" round>吊牌价:{{item.tprice}}</van-tag>
         </template>
       </van-cell>
     </van-list>
@@ -74,11 +74,13 @@ export default {
   },
   data() {
     return {
+      // baseurl: 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/',
+      baseurl: 'http://127.0.0.1:8000/',
       ruleshow: false,
       rules: [
-        { 'type': 0, 'name': '无', 'jsurl': 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/rule0.js' },
-        { 'type': 1, 'name': '促销活动1', 'jsurl': 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/rule1.js' },
-        { 'type': 1, 'name': '促销活动2', 'jsurl': 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/rule2.js' }
+        { 'type': 0, 'name': '无', 'jsurl': baseurl + 'rule0.js' },
+        { 'type': 1, 'name': '整单8折', 'jsurl': baseurl + 'rule1.js' },
+        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': baseurl + 'rule2.js' }
       ],
       bill: {
         'name': 'sunjiaying',
