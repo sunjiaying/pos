@@ -112,6 +112,8 @@ export default {
       it.fprice = 1980;
       it.point = 1980 / 20;
       this.bill.items.push(it);
+
+      this.calc();
     },
     showrules() {
       this.$refs.rule.unload();
