@@ -5,6 +5,7 @@ window.calc = function(value) {
     objs.items.forEach(item => {
         // 整单8折
         item.fprice = item.tprice * 0.8;
+        item.point = item.fprice / 20; // 20元积1分
     });
     return objs;
 }

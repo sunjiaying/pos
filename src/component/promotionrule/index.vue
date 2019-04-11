@@ -34,7 +34,7 @@ export default {
       this.currentTabComponent = 'remote-js';
       this.showrj = true;
       this.jssrc = src;
-      // console.log('loadjs: ' + src);
+      console.log('loadjs: ' + src);
     },
     calc(val) {
       if (window.calc === undefined) {

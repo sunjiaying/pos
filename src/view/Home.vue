@@ -9,7 +9,6 @@
     <van-cell-group>
       <!-- <van-cell>
         <template slot="title">
-          <van-button round size="small" text="选择促销活动" @click="showrules" />
           <van-button round size="small" text="unloadjs" @click="unloadjs" />
           <van-button round size="small" text="calc" @click="calc" />
         </template>
@@ -24,6 +23,7 @@
       </van-cell>
       <van-cell>
         <template slot="title">
+          <van-tag plain type="primary">可返积分:{{getPointTotal(bill)}}</van-tag>
           <van-tag v-if="bill.rule" mark type="danger">{{bill.rule.name}}</van-tag>
         </template>
       </van-cell>
@@ -78,9 +78,9 @@ export default {
       baseurl: 'http://127.0.0.1:8000/',
       ruleshow: false,
       rules: [
-        { 'type': 0, 'name': '无', 'jsurl': this.baseurl + 'rule0.js' },
-        { 'type': 1, 'name': '整单8折', 'jsurl': this.baseurl + 'rule1.js' },
-        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': this.baseurl + 'rule2.js' }
+        { 'type': 0, 'name': '无', 'jsurl': 'rule0.js' },
+        { 'type': 1, 'name': '整单8折', 'jsurl': 'rule1.js' },
+        { 'type': 1, 'name': '满5000送A1143001102', 'jsurl': 'rule2.js' }
       ],
       bill: {
         'name': 'sunjiaying',
@@ -88,7 +88,12 @@ export default {
         'vip': null,
         'coupons': [],
         'items': [
-          { 'matcode': 'A1143001102', 'tprice': 2680, 'fprice': 2680 }
+          {
+            'matcode': 'A1143001102', // 款号
+            'tprice': 2680, // 吊牌价
+            'fprice': 2680, // 应收款
+            'point': 2680 / 20 // 可反积分
+          }
         ]
       }
     };
@@ -99,6 +104,7 @@ export default {
       it.matcode = 'A' + Math.floor(Math.random() * 10000000) + '02';
       it.tprice = 1980;
       it.fprice = 1980;
+      it.point = 1980 / 20;
       this.bill.items.push(it);
     },
     showrules() {
@@ -106,7 +112,7 @@ export default {
       this.ruleshow = true;
     },
     loadjs(rule) {
-      this.$refs.rule.loadjs(rule.jsurl + '?v=' + Math.random());
+      this.$refs.rule.loadjs(this.baseurl + rule.jsurl + '?v=' + Math.random());
       this.bill.rule = rule;
       this.ruleshow = false;
       if (rule.type === 0) {
@@ -126,6 +132,13 @@ export default {
     calc() {
       var r = this.$refs.rule.calc(this.bill);
       console.log(r);
+    },
+    getPointTotal(bill) {
+      var point = 0;
+      bill.items.forEach(item => {
+        point = point + item.point;
+      });
+      return point;
     }
   }
 };
