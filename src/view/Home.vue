@@ -15,10 +15,10 @@
       </van-cell> -->
       <van-cell>
         <template slot="title">
-          <van-button type="primary" size="small" text="扫码" @click="add" />
-          <van-button size="small" text="VIP" />
-          <van-button type="warning" size="small" text="券" />
-          <van-button type="danger" size="small" text="促销活动" @click="showrules" />      
+          <van-button type="primary" size="small" text="扫码" @click="scan" />
+          <van-button plain type="primary" size="small" text="VIP" @click="showvip" />
+          <van-button plain type="primary" size="small" text="券" @click="showcoupons" />
+          <van-button plain type="primary" size="small" text="促销活动" @click="showrules" />      
         </template>
       </van-cell>
       <van-cell>
@@ -49,6 +49,34 @@
       </van-swipe-cell>      
     </van-list>
 
+    <van-popup v-model="vipshow" position="bottom" :overlay="true" >
+      <div style="padding-left:10px;padding-top:10px;padding-right:10px;padding-bottom:10px;overflow-x:auto;">
+        <van-field
+            center
+            clearable
+            label="VIP"
+            placeholder="请输入VIP电话号码"
+          >
+          <van-button slot="button" plain size="small" type="primary" style="min-width:40px;margin-right:5px;">确认</van-button>
+          <van-button slot="button" size="small" type="primary">扫描</van-button>
+        </van-field>
+      </div>
+    </van-popup>
+
+    <van-popup v-model="couponshow" position="bottom" :overlay="true" >
+      <div style="padding-left:10px;padding-top:10px;padding-right:10px;padding-bottom:10px;overflow-x:auto;">
+        <van-field
+            center
+            clearable
+            label="优惠券"
+            placeholder="请输入优惠券号"
+          >
+          <van-button slot="button" plain size="small" type="primary" style="min-width:40px;margin-right:5px;">确认</van-button>
+          <van-button slot="button" size="small" type="primary">扫描</van-button>
+        </van-field>
+      </div>
+    </van-popup>
+
     <van-popup v-model="ruleshow" position="bottom" :overlay="true" >
       <div style="padding-left:10px;padding-top:10px;padding-right:10px;padding-bottom:10px;overflow-x:auto;">
         <span v-for="rule in rules" v-bind:key="rule.name">
@@ -62,11 +90,12 @@
 </template>
 
 <script>
-import { Popup, SwipeCell, Tag, List, Cell, CellGroup, NavBar, Panel, Row, Col, Icon, Button } from 'vant';
+import { Notify, Field, Popup, SwipeCell, Tag, List, Cell, CellGroup, NavBar, Panel, Row, Col, Icon, Button } from 'vant';
 import PromotionRule from '../component/promotionrule';
 
 export default {
   components: {
+    [Field.name]: Field,
     [PromotionRule.name]: PromotionRule,
     [SwipeCell.name]: SwipeCell,
     [Popup.name]: Popup,
@@ -85,8 +114,10 @@ export default {
   },
   data() {
     return {
-      // baseurl: 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/',
-      baseurl: 'http://127.0.0.1:8000/',
+      baseurl: 'https://marisfrolg.nos-eastchina1.126.net/UPDATE/js/',
+      // baseurl: 'http://127.0.0.1:8000/',
+      vipshow: false,
+      couponshow: false,
       ruleshow: false,
       rules: [
         { 'type': 0, 'name': '无', 'jsurl': 'rule0.js' },
@@ -112,9 +143,40 @@ export default {
     };
   },
   methods: {
-    add() {
+    scan() {
+      var _this = this;
+      window.cordova.plugins.gizscanqrcode.scan(
+        {
+          'baseColor': '#4e8dec',
+          'title': '扫描条码或者二维码',
+          'barColor': '4e8dec',
+          'statusBarColor': 'white',
+          'describe': '我是提示语',
+          'describeFontSize': '15',
+          'describeLineSpacing': '8',
+          'describeColor': 'ffffff',
+          'borderColor': '4e8dec',
+          'borderScale': '0.6',
+          'choosePhotoEnable': 'true',
+          'choosePhotoBtnTitle': '相册',
+          'choosePhotoBtnColor': '4e8dec',
+          'flashlightEnable': 'true'
+        },
+        function(result) {
+          var matcode = JSON.parse(result).result;
+          Notify('扫描到 ' + matcode + ' 商品成功');
+          _this.add(matcode);
+        },
+        function(error) {
+          console.log(error);
+        }
+      );
+    },
+    add(matcode) {
+      // 在这里读取商品资料（吊牌价、图片等），通常是需要调用远端webapi，然后回调再执行以下的代码
       var it = {};
-      it.matcode = 'A' + Math.floor(Math.random() * 10000000) + '02';
+      // it.matcode = 'A' + Math.floor(Math.random() * 10000000) + '02';
+      it.matcode = matcode;
       it.tprice = 1980;
       it.fprice = 1980;
       it.point = 1980 / 20;
@@ -126,6 +188,12 @@ export default {
       this.bill.items.splice(index, 1);
 
       this.calc();
+    },
+    showvip() {
+      this.vipshow = true;
+    },
+    showcoupons() {
+      this.couponshow = true;
     },
     showrules() {
       this.$refs.rule.unload();

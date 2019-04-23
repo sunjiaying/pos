@@ -33,3 +33,16 @@ function getTotalWithoutMat(bill, matcode) {
     });
     return total;
 }
+
+// 白名单和黑名单能用于在促销活动中指定相应的商品参与或者排队参与
+// 白名单
+var whiltelist = [
+    "A123",
+    "A1234"
+]
+
+// 黑名单
+var blacklist = [
+    "B123",
+    "B1234"
+]
