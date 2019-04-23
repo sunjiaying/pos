@@ -18,7 +18,7 @@
           <van-button type="primary" size="small" text="扫码" @click="scan" />
           <van-button plain type="primary" size="small" text="VIP" @click="showvip" />
           <van-button plain type="primary" size="small" text="券" @click="showcoupons" />
-          <van-button plain type="primary" size="small" text="促销活动" @click="showrules" />      
+          <van-button plain type="primary" size="small" text="促销活动" @click="showrules" />
         </template>
       </van-cell>
       <van-cell>
@@ -139,7 +139,8 @@ export default {
             'point': 2680 / 20 // 可反积分
           }
         ]
-      }
+      },
+      jswindow: null
     };
   },
   methods: {

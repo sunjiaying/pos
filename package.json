@@ -13,6 +13,7 @@
     "rebuild-android": "npm run build && cordova platform rm android && cordova platform add android && cordova build android"
   },
   "dependencies": {
+    "com.lesfrancschatons.cordova.plugins.overappbrowser": "git+https://github.com/etabard/Cordova-OverAppBrowser.git",
     "cordova-android": "^7.1.4",
     "cordova-android-support-gradle-release": "^3.0.0",
     "cordova-ios": "^4.5.5",
@@ -91,7 +92,8 @@
       "gizscanqrcode": {},
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "27.+"
-      }
+      },
+      "com.lesfrancschatons.cordova.plugins.overappbrowser": {}
     },
     "platforms": [
       "android"

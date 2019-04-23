@@ -32,5 +32,6 @@
     <plugin name="cordova-android-support-gradle-release" spec="^3.0.0">
         <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
     </plugin>
+    <plugin name="com.lesfrancschatons.cordova.plugins.overappbrowser" spec="https://github.com/etabard/Cordova-OverAppBrowser.git" />
     <engine name="android" spec="^7.1.4" />
 </widget>
